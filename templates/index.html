@@ -14,6 +14,13 @@
 		<input type="file" name="file">
 		<button type="submit" name="submit">Upload</button>
 	</form>
+	<br><br><br><br><br>
+	<h2>Uploaded Files</h2>
+	<ul>
+		{% for file in files %}
+		<li><a href="/uploads/{{ file }}">{{ file }}</a></li>
+		{% endfor %}
+	</ul>
 
 </body>
 
