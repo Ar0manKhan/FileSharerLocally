@@ -5,3 +5,4 @@
 - Styling the UI.
 - Alerting when the file is uploaded.
 - And any new feature you can think of and implement.
+- Dockerize the app.
