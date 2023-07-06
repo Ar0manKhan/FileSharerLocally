@@ -1,5 +1,5 @@
 from os import path, listdir
-from flask import Flask, render_template, request, send_from_directory
+from flask import Flask, redirect, render_template, request, send_from_directory
 
 
 def get_local_ip():
@@ -30,7 +30,7 @@ def upload():
     uploaded_file = request.files['file']
     if uploaded_file.filename != '':
         uploaded_file.save(path.join('uploads', uploaded_file.filename))
-    return render_template('index.html')
+    return redirect('/')
 
 
 @app.get('/uploads/<filename>')
@@ -39,4 +39,4 @@ def download(filename):
 
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=5000)
