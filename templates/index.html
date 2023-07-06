@@ -9,6 +9,8 @@
 
 <body>
 	<h1>File Sharer Locally</h1>
+	<p>Connect anywhere from your local address: <a href="{{ address }}">{{ address }}</a></p>
+	<div id="qrcode"></div>
 	<p>Upload your file here</p>
 	<form action="/upload" method="post" enctype="multipart/form-data">
 		<input type="file" name="file">
