@@ -11,12 +11,15 @@ Requirements:
 - git
 
 ```bash
-git clone
+git clone https://github.com/Ar0manKhan/FileSharerLocally.git
 cd FileSharerLocally
 virtualenv venv
 source venv/bin/activate
 pip install -r requirements.txt
 ```
+Note:
+If you don't have git installed, you can download the zip file from the github page.
+and then extract it and follow the rest of the steps.
 
 ## Usage
 
