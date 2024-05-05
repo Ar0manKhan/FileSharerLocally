@@ -19,7 +19,7 @@
 	<h2>Uploaded Files</h2>
 	<ul>
 		{% for file in files %}
-		<li><a href="/uploads/{{ file }}">{{ file }}</a></li>
+      <li><a href="{{ file.url }}">{{ file.name }}</a></li>
 		{% endfor %}
 	</ul>
 	<div id="qrcode"></div>
