@@ -1,5 +1,4 @@
-from os import path, listdir
-import os
+from os import path, listdir, getcwd
 from flask import Flask, redirect, render_template, request, send_from_directory
 import flask
 
@@ -35,9 +34,9 @@ def home(user_path: str):
 
 def extract_path(user_path: str):
     if user_path == "":
-        return os.getcwd()
+        return getcwd()
     else:
-        return path.join(os.getcwd(), user_path)
+        return path.join(getcwd(), user_path)
 
 @app.post('/', defaults={"user_path": ""})
 @app.post('/<path:user_path>')
