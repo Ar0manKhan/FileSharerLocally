@@ -1,6 +1,5 @@
 from os import path, listdir, getcwd
-from flask import Flask, redirect, render_template, request, send_from_directory
-import flask
+from flask import Flask, redirect, render_template, request, send_from_directory, send_file
 
 
 def get_local_ip():
@@ -30,7 +29,7 @@ def home(user_path: str):
             path=user_path,
         )
     else:
-        return flask.send_file(current_path)
+        return send_file(current_path)
 
 def extract_path(user_path: str):
     if user_path == "":
