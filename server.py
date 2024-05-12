@@ -17,37 +17,37 @@ HOST = get_local_ip()
 app = Flask(__name__)
 
 
-@app.route('/', defaults={"user_path": ""})
-@app.route('/<path:user_path>')
+@app.get('/', defaults={"user_path": ""})
+@app.get('/<path:user_path>')
 def home(user_path: str):
-    current_path = "./"
-    cwd = os.getcwd()
-    if user_path != "":
-        current_path = path.join(cwd, user_path)
-
+    current_path = extract_path(user_path)
     if not path.exists(current_path):
         return "404"
     if path.isdir(current_path):
         return render_template(
             'index.html',
             files=map(lambda x: {"url": path.join(user_path, x), "name": x},listdir(current_path)),
-            address=f'http://{HOST}:{PORT}'
+            address=f'http://{HOST}:{PORT}',
+            path=user_path,
         )
     else:
         return flask.send_file(current_path)
 
+def extract_path(user_path: str):
+    if user_path == "":
+        return os.getcwd()
+    else:
+        return path.join(os.getcwd(), user_path)
 
-@app.post('/upload')
-def upload():
+@app.post('/', defaults={"user_path": ""})
+@app.post('/<path:user_path>')
+def upload(user_path: str):
+    current_path = extract_path(user_path)
     uploaded_file = request.files['file']
-    if uploaded_file.filename != None:
-        uploaded_file.save(path.join('uploads', uploaded_file.filename))
-    return redirect('/')
-
-
-@app.get('/uploads/<filename>')
-def download(filename):
-    return send_from_directory('uploads', filename)
+    print(f'{uploaded_file=} -- {uploaded_file.filename=}')
+    if uploaded_file.filename:
+        uploaded_file.save(path.join(current_path, uploaded_file.filename))
+    return redirect(f'/{user_path}')
 
 
 if __name__ == '__main__':
